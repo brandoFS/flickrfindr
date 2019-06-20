@@ -17,7 +17,7 @@ ext {
     constrainLayoutVersion = '1.1.3'
     timberVersion = '4.5.1'
     glideVersion = '4.0.0'
-    daggerVersion = '2.16'
+    daggerVersion = '2.21'
     moshiVersion = '2.5.0'
     moshiKotlinVersion = '1.8.0'
     okioVersion = '2.1.0'
@@ -52,6 +52,7 @@ ext {
             timber             : "com.jakewharton.timber:timber:${timberVersion}",
             daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger             : "com.google.dagger:dagger:${daggerVersion}",
+            daggerSupport      : "com.google.dagger:dagger-android-support:${daggerVersion}",
             daggerAndroid      : "com.google.dagger:dagger-android:${daggerVersion}",
             daggerProcessor    : "com.google.dagger:dagger-android-processor:${daggerVersion}",
             rxKotlin           : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
