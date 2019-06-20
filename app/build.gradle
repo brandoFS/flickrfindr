@@ -31,10 +31,11 @@ android {
         }
     }
 
-    dexOptions {
-        preDexLibraries = false
-        dexInProcess = false
-        javaMaxHeapSize "4g"
+    //Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
     }
 
     dataBinding {
@@ -73,6 +74,8 @@ dependencies {
 
     implementation presentationDependencies.dagger
     implementation presentationDependencies.daggerAndroid
+    implementation presentationDependencies.daggerSupport
+
     kapt presentationDependencies.daggerCompiler
     kapt presentationDependencies.daggerProcessor
     implementation presentationDependencies.javaxInject
