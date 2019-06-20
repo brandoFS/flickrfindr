@@ -1,0 +1,99 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
+
+    defaultConfig {
+        applicationId "com.brando.flickrfindr"
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled true
+        }
+    }
+
+    dexOptions {
+        preDexLibraries = false
+        dexInProcess = false
+        javaMaxHeapSize "4g"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    kapt {
+        javacOptions {
+            // Increase the max count of errors from annotation processors.
+            // Default is 100.
+            option("-Xmaxerrs", 500)
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation presentationDependencies.kotlin
+    implementation presentationDependencies.appCompat
+    implementation presentationDependencies.material
+    implementation presentationDependencies.timber
+    implementation presentationDependencies.glide
+
+    implementation presentationDependencies.constraintLayout
+
+    implementation presentationDependencies.lifeCycleExtensions // No -ktx
+    kapt presentationDependencies.dataBinding // Same version as gradle
+
+    //Retrofit and Dagger
+    implementation presentationDependencies.retrofit
+
+    implementation presentationDependencies.dagger
+    implementation presentationDependencies.daggerAndroid
+    kapt presentationDependencies.daggerCompiler
+    kapt presentationDependencies.daggerProcessor
+    implementation presentationDependencies.javaxInject
+    implementation presentationDependencies.retrofitAdapter
+    implementation presentationDependencies.moshi
+
+    implementation presentationDependencies.rxKotlin
+    implementation presentationDependencies.rxAndroid
+
+    implementation presentationDependencies.moshiKotlin
+    implementation presentationDependencies.okio
+
+    //Testing
+    androidTestImplementation presentationTestDependencies.coreTesting
+    androidTestImplementation presentationTestDependencies.androidXJunit
+    androidTestImplementation presentationTestDependencies.androidXRunner
+    androidTestImplementation presentationTestDependencies.espresso
+    androidTestImplementation presentationTestDependencies.espressoIdlingResource
+    androidTestUtil presentationTestDependencies.orchestrator
+
+    testImplementation presentationTestDependencies.junit
+    testImplementation presentationTestDependencies.kotlinJUnit
+    testImplementation presentationTestDependencies.kotlinReflect
+}
