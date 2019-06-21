@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">search</string>
+    <string name="search">Search…</string>
+    <string name="search_flickr">Search Flickr</string>
+</resources>

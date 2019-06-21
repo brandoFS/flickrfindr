@@ -2,6 +2,10 @@
 
 buildscript {
     ext.kotlin_version = '1.3.40'
+    ext.navi = '2.0.0'
+
+
+
     repositories {
         google()
         jcenter()

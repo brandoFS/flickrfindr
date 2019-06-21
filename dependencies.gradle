@@ -24,6 +24,8 @@ ext {
     materialVersion = '1.0.0'
     lifeCycleExtensionsVersion = '2.0.0'
     dataBindingVersion = '3.2.1'
+    navigationVersion = '2.0.0'
+
 
     //Testing
     jUnitVersion = '4.12'
@@ -65,7 +67,9 @@ ext {
             moshi              : "com.squareup.retrofit2:converter-moshi:${moshiVersion}",
             moshiKotlin        : "com.squareup.moshi:moshi-kotlin:${moshiKotlinVersion}",
             okio               : "com.squareup.okio:okio:${okioVersion}",
-            dataBinding        : "androidx.databinding:databinding-compiler-common:${dataBindingVersion}"
+            dataBinding        : "androidx.databinding:databinding-compiler-common:${dataBindingVersion}",
+            navigationFragment : "androidx.navigation:navigation-fragment-ktx:${navigationVersion}",
+            navigationUI       : "androidx.navigation:navigation-ui-ktx:${navigationVersion}"
 
     ]
 
