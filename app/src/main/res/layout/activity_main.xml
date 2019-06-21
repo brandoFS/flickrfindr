@@ -40,7 +40,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <ImageButton
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,6 +48,11 @@
             app:layout_constraintLeft_toRightOf="@+id/layout_search_input"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/layout_search_input"
-            android:text="@string/search_flickr"/>
+            android:src="@drawable/ic_search_black_24dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginRight="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
