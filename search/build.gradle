@@ -43,6 +43,9 @@ dependencies {
     implementation presentationDependencies.lifeCycleExtensions // No -ktx
     kapt presentationDependencies.dataBinding // Same version as gradle
 
+    //Navigation
+    implementation presentationDependencies.navigationUI
+    implementation  "androidx.navigation:navigation-fragment-ktx:$rootProject.navi"
 
     testImplementation dataTestDependencies.junit
     testImplementation dataTestDependencies.kotlinJUnit

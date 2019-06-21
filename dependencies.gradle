@@ -23,7 +23,7 @@ ext {
     okioVersion = '2.1.0'
     materialVersion = '1.0.0'
     lifeCycleExtensionsVersion = '2.0.0'
-    dataBindingVersion = '3.2.1'
+    dataBindingVersion = '3.4.0'
     navigationVersion = '2.0.0'
 
 

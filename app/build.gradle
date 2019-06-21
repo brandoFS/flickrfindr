@@ -102,7 +102,6 @@ dependencies {
     testImplementation presentationTestDependencies.kotlinReflect
 
     //Navigation
-    //implementation presentationDependencies.navigationFragment
     implementation presentationDependencies.navigationUI
     implementation  "androidx.navigation:navigation-fragment-ktx:$rootProject.navi"
 }
