@@ -1,4 +1,4 @@
-package com.brando.flickrfindr.di
+package com.brando.flickrfindr.di.module
 
 import com.brando.flickrfindr.MainActivity
 import dagger.Module

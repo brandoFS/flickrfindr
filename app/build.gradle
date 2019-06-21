@@ -57,6 +57,9 @@ android {
 }
 
 dependencies {
+    implementation project(':data')
+    implementation project(':search')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation presentationDependencies.kotlin
     implementation presentationDependencies.appCompat
@@ -69,18 +72,15 @@ dependencies {
     implementation presentationDependencies.lifeCycleExtensions // No -ktx
     kapt presentationDependencies.dataBinding // Same version as gradle
 
-    //Retrofit and Dagger
-    implementation presentationDependencies.retrofit
 
+
+    //Dagger for Dependency Injection
     implementation presentationDependencies.dagger
     implementation presentationDependencies.daggerAndroid
     implementation presentationDependencies.daggerSupport
 
     kapt presentationDependencies.daggerCompiler
     kapt presentationDependencies.daggerProcessor
-    implementation presentationDependencies.javaxInject
-    implementation presentationDependencies.retrofitAdapter
-    implementation presentationDependencies.moshi
 
     implementation presentationDependencies.rxKotlin
     implementation presentationDependencies.rxAndroid
@@ -99,4 +99,9 @@ dependencies {
     testImplementation presentationTestDependencies.junit
     testImplementation presentationTestDependencies.kotlinJUnit
     testImplementation presentationTestDependencies.kotlinReflect
+
+    //Navigation
+    //implementation presentationDependencies.navigationFragment
+    implementation presentationDependencies.navigationUI
+    implementation  "androidx.navigation:navigation-fragment-ktx:$rootProject.navi"
 }
