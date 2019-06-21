@@ -1,1 +1,1 @@
-include ':app', ':data', ':search'
+include ':app', ':data', ':search', ':imageviewer'
