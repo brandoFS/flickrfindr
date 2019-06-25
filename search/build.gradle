@@ -27,9 +27,15 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
+    implementation project(':core')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation presentationDependencies.kotlin
@@ -40,16 +46,31 @@ dependencies {
 
     implementation presentationDependencies.constraintLayout
 
-    implementation presentationDependencies.lifeCycleExtensions // No -ktx
+    implementation presentationDependencies.lifeCycleExtensions
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
+
     kapt presentationDependencies.dataBinding // Same version as gradle
 
     //Navigation
     implementation presentationDependencies.navigationUI
-    implementation  "androidx.navigation:navigation-fragment-ktx:$rootProject.navi"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navi"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1"
 
     testImplementation dataTestDependencies.junit
     testImplementation dataTestDependencies.kotlinJUnit
 
     androidTestImplementation presentationTestDependencies.espresso
     androidTestImplementation presentationTestDependencies.androidXRunner
+
+//Dagger for Dependency Injection
+    implementation presentationDependencies.dagger
+    implementation presentationDependencies.daggerAndroid
+    implementation presentationDependencies.daggerSupport
+
+    kapt presentationDependencies.daggerCompiler
+    kapt presentationDependencies.daggerProcessor
+    implementation presentationDependencies.javaxInject
 }

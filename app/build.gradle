@@ -57,7 +57,7 @@ android {
 }
 
 dependencies {
-    implementation project(':data')
+    implementation project(':core')
     implementation project(':search')
     implementation project(':imageviewer')
 

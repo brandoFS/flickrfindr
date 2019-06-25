@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.brando.search.SearchFragment"
+        android:name="com.brando.search.ui.SearchFragment"
         android:label="SearchFragment">
         <action
                 android:id="@+id/action_searchFragment_to_imageFragment"

@@ -2,11 +2,12 @@ package com.brando.data.di.module
 
 import com.brando.data.Constants
 import com.brando.data.api.ApiService
+import dagger.Lazy
 import dagger.Module
 import dagger.Provides
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -19,11 +20,11 @@ open class ApiModule {
 
     @Provides
     @Singleton
-    fun retrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    fun retrofit(okHttpClient: Lazy<OkHttpClient>): Retrofit = Retrofit.Builder()
         .baseUrl(Constants.FLICKR_API)
-        .client(okHttpClient)
+        //.client(okHttpClient)
         .addConverterFactory(MoshiConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .callFactory { okHttpClient.get().newCall(it) }
         .build()
 
     @Provides
@@ -37,7 +38,22 @@ open class ApiModule {
         okHttpClientBuilder.connectTimeout(TIMEOUT, TimeUnit.SECONDS)
         okHttpClientBuilder.readTimeout(TIMEOUT, TimeUnit.SECONDS)
         okHttpClientBuilder.writeTimeout(TIMEOUT, TimeUnit.SECONDS)
+            .addInterceptor(authInterceptor)
         return okHttpClientBuilder.build()
+    }
+
+    private val authInterceptor = Interceptor { chain ->
+        val newUrl = chain.request().url()
+            .newBuilder()
+            .addQueryParameter("api_key", Constants.FLICKR_APP_KEY)
+            .build()
+
+        val newRequest = chain.request()
+            .newBuilder()
+            .url(newUrl)
+            .build()
+
+        chain.proceed(newRequest)
     }
 
 }

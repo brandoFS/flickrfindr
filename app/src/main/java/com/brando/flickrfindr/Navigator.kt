@@ -1,8 +1,9 @@
 package com.brando.flickrfindr
 
 import androidx.navigation.NavController
+import com.brando.imageviewer.ImageFragment
 import com.brando.imageviewer.ImageNavigation
-import com.brando.search.SearchNavigation
+import com.brando.search.ui.SearchNavigation
 import javax.inject.Singleton
 
 @Singleton
@@ -14,8 +15,8 @@ class Navigator : SearchNavigation, ImageNavigation {
         navController?.popBackStack()
     }
 
-    override fun openImageViewer() {
-        navController?.navigate(R.id.action_searchFragment_to_imageFragment)
+    override fun openImageViewer(imageId : Long) {
+        navController?.navigate(R.id.action_searchFragment_to_imageFragment, ImageFragment.createBundle(imageId))
     }
 
     fun bind(navController: NavController) {
