@@ -6,6 +6,10 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply from: '../shared_data_dependencies.gradle'
+apply from: '../shared_presentation_dependencies.gradle'
+apply from: '../test_dependencies.gradle'
+
 android {
 
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -62,46 +66,12 @@ dependencies {
     implementation project(':imageviewer')
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation presentationDependencies.kotlin
-    implementation presentationDependencies.appCompat
-    implementation presentationDependencies.material
-    implementation presentationDependencies.timber
-    implementation presentationDependencies.glide
-
-    implementation presentationDependencies.constraintLayout
-
-    implementation presentationDependencies.lifeCycleExtensions // No -ktx
-    kapt presentationDependencies.dataBinding // Same version as gradle
 
 
-
-    //Dagger for Dependency Injection
-    implementation presentationDependencies.dagger
-    implementation presentationDependencies.daggerAndroid
-    implementation presentationDependencies.daggerSupport
-
-    kapt presentationDependencies.daggerCompiler
-    kapt presentationDependencies.daggerProcessor
-
-    implementation presentationDependencies.rxKotlin
-    implementation presentationDependencies.rxAndroid
-
-    implementation presentationDependencies.moshiKotlin
-    implementation presentationDependencies.okio
-
-    //Testing
-    androidTestImplementation presentationTestDependencies.coreTesting
-    androidTestImplementation presentationTestDependencies.androidXJunit
-    androidTestImplementation presentationTestDependencies.androidXRunner
-    androidTestImplementation presentationTestDependencies.espresso
-    androidTestImplementation presentationTestDependencies.espressoIdlingResource
-    androidTestUtil presentationTestDependencies.orchestrator
-
-    testImplementation presentationTestDependencies.junit
-    testImplementation presentationTestDependencies.kotlinJUnit
-    testImplementation presentationTestDependencies.kotlinReflect
+    implementation Dependencies.moshiKotlin
+    implementation Dependencies.okio
 
     //Navigation
-    implementation presentationDependencies.navigationUI
-    implementation  "androidx.navigation:navigation-fragment-ktx:$rootProject.navi"
+    implementation Dependencies.navigationUI
+    implementation Dependencies.navigationFragment
 }

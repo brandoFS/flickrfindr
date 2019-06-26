@@ -6,6 +6,10 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply from: '../shared_data_dependencies.gradle'
+apply from: '../shared_presentation_dependencies.gradle'
+apply from: '../test_dependencies.gradle'
+
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
@@ -38,39 +42,8 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation presentationDependencies.kotlin
-    implementation presentationDependencies.appCompat
-    implementation presentationDependencies.material
-    implementation presentationDependencies.timber
-    implementation presentationDependencies.glide
-
-    implementation presentationDependencies.constraintLayout
-
-    implementation presentationDependencies.lifeCycleExtensions
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.0.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
-
-    kapt presentationDependencies.dataBinding // Same version as gradle
-
     //Navigation
-    implementation presentationDependencies.navigationUI
-    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navi"
+    implementation Dependencies.navigationUI
+    implementation Dependencies.navigationFragment
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1"
-
-    testImplementation dataTestDependencies.junit
-    testImplementation dataTestDependencies.kotlinJUnit
-
-    androidTestImplementation presentationTestDependencies.espresso
-    androidTestImplementation presentationTestDependencies.androidXRunner
-
-//Dagger for Dependency Injection
-    implementation presentationDependencies.dagger
-    implementation presentationDependencies.daggerAndroid
-    implementation presentationDependencies.daggerSupport
-
-    kapt presentationDependencies.daggerCompiler
-    kapt presentationDependencies.daggerProcessor
-    implementation presentationDependencies.javaxInject
 }

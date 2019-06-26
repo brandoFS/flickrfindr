@@ -6,18 +6,22 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
-android {
-    compileSdkVersion 29
+apply from: '../shared_data_dependencies.gradle'
+apply from: '../shared_presentation_dependencies.gradle'
+apply from: '../test_dependencies.gradle'
 
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -36,21 +40,4 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation presentationDependencies.kotlin
-    implementation presentationDependencies.appCompat
-    implementation presentationDependencies.material
-    implementation presentationDependencies.timber
-    implementation presentationDependencies.glide
-
-    implementation presentationDependencies.constraintLayout
-
-    implementation presentationDependencies.lifeCycleExtensions // No -ktx
-    kapt presentationDependencies.dataBinding // Same version as gradle
-
-
-    testImplementation dataTestDependencies.junit
-    testImplementation dataTestDependencies.kotlinJUnit
-
-    androidTestImplementation presentationTestDependencies.espresso
-    androidTestImplementation presentationTestDependencies.androidXRunner
 }

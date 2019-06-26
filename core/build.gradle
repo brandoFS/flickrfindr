@@ -6,6 +6,9 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply from: '../shared_data_dependencies.gradle'
+apply from: '../test_dependencies.gradle'
+
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
@@ -53,40 +56,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    def dataDependencies = rootProject.ext.dataDependencies
-    def dataTestDependencies = rootProject.ext.dataTestDependencies
-
     //Retrofit and Dagger
-    implementation presentationDependencies.retrofit
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofitAdapter
+    implementation Dependencies.moshi
+    implementation Dependencies.moshiKotlin
 
-    //Dagger for Dependency Injection
-    implementation presentationDependencies.dagger
-    implementation presentationDependencies.daggerAndroid
-    implementation presentationDependencies.daggerSupport
-
-    kapt presentationDependencies.daggerCompiler
-    kapt presentationDependencies.daggerProcessor
-    implementation presentationDependencies.javaxInject
-    implementation presentationDependencies.retrofitAdapter
-    implementation presentationDependencies.moshi
-
-    implementation presentationDependencies.rxKotlin
-    implementation presentationDependencies.rxAndroid
-
-    implementation presentationDependencies.moshiKotlin
-
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1"
-
-    implementation dataDependencies.retrofit
-    implementation dataDependencies.rxKotlin
-    implementation dataDependencies.javaxInject
-    implementation dataDependencies.okio
-
-    testImplementation dataTestDependencies.junit
-    testImplementation dataTestDependencies.kotlinJUnit
-
-    androidTestImplementation presentationTestDependencies.espresso
-    androidTestImplementation presentationTestDependencies.androidXRunner
+    implementation Dependencies.okio
 
 }
