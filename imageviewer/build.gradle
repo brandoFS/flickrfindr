@@ -38,12 +38,6 @@ android {
 }
 
 dependencies {
-    implementation project(':core')
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    //Navigation
-    implementation Dependencies.navigationUI
-    implementation Dependencies.navigationFragment
 
 }

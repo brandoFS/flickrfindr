@@ -7,7 +7,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 apply from: '../shared_data_dependencies.gradle'
-apply from: '../shared_presentation_dependencies.gradle'
 apply from: '../test_dependencies.gradle'
 
 android {
@@ -24,6 +23,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
         release {
             minifyEnabled false
@@ -31,19 +31,37 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+    //Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
+
+    kapt {
+        javacOptions {
+            // Increase the max count of errors from annotation processors.
+            // Default is 100.
+            option("-Xmaxerrs", 500)
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
 }
 
 dependencies {
-    implementation project(':core')
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //Navigation
-    implementation Dependencies.navigationUI
-    implementation Dependencies.navigationFragment
+    //Retrofit and Dagger
+    implementation Dependencies.retrofit
+    implementation Dependencies.retrofitAdapter
+    implementation Dependencies.moshi
+    implementation Dependencies.moshiKotlin
+
+    implementation Dependencies.okio
 
 }
